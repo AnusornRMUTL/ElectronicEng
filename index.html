@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENGEE160 | อิเล็กทรอนิกส์วิศวกรรม</title>
+    <meta name="description" content="เว็บไซต์ประกอบการเรียนวิชา ENGEE160 อิเล็กทรอนิกส์วิศวกรรม (Engineering Electronics) คณะวิศวกรรมศาสตร์ มทร.ล้านนา เชียงราย">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:#080c14; --surface:#0f172a; --border:#1e3a5f;
+            --primary:#3b82f6; --primary-glow:#60a5fa;
+            --accent:#8b5cf6; --green:#22c55e; --red:#ef4444;
+            --text:#f1f5f9; --muted:#94a3b8;
+            --card-hover:rgba(59,130,246,0.06);
+        }
+        *{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+
+        nav{position:sticky;top:0;z-index:100;background:rgba(8,12,20,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+        .nav-brand{display:flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:700;color:var(--primary-glow);text-decoration:none}
+        .nav-brand span{color:var(--muted);font-weight:400;font-size:.9rem}
+        .nav-links{display:flex;gap:1.5rem}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:.95rem;transition:color .2s}
+        .nav-links a:hover{color:var(--text)}
+
+        .hero{position:relative;overflow:hidden;padding:5rem 2rem 4rem;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(59,130,246,0.18) 0%,transparent 70%)}
+        .course-badge{display:inline-block;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.4);color:var(--primary-glow);padding:.3rem 1rem;border-radius:999px;font-size:.85rem;font-weight:600;letter-spacing:1px;margin-bottom:1.2rem}
+        .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.2;background:linear-gradient(135deg,#f1f5f9 0%,#60a5fa 50%,#a78bfa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+        .hero-sub{font-size:1.1rem;color:var(--muted);max-width:600px;margin:0 auto 2rem}
+        .hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;font-size:.9rem}
+        .hero-meta-item{display:flex;align-items:center;gap:.4rem;color:var(--muted)}
+        .hero-meta-item strong{color:var(--text)}
+
+        section{padding:4rem 2rem}
+        .container{max-width:1100px;margin:0 auto}
+        .section-header{text-align:center;margin-bottom:2.5rem}
+        .section-tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+        .section-header h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700}
+        .section-header p{color:var(--muted);margin-top:.5rem;font-size:1rem}
+
+        .info-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem}
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
+        .info-item{text-align:center}
+        .info-item .label{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:.3rem}
+        .info-item .value{font-size:1.05rem;font-weight:600}
+        .info-item .value.code{font-family:'Inter',monospace;color:var(--primary-glow);font-size:1.2rem}
+
+        .topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+        .topic-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:.6rem;transition:transform .2s,border-color .2s,box-shadow .2s,background .2s;position:relative;overflow:hidden}
+        .topic-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--ca),var(--cb));opacity:0;transition:opacity .2s}
+        .topic-card:hover{transform:translateY(-4px);border-color:var(--ca,var(--primary));box-shadow:0 8px 32px rgba(0,0,0,.4);background:var(--card-hover)}
+        .topic-card:hover::before{opacity:1}
+        .topic-card.live{border-color:var(--primary);background:rgba(59,130,246,.07)}
+        .topic-card.live:hover{box-shadow:0 8px 32px rgba(59,130,246,.2)}
+        .card-number{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+        .card-icon{font-size:2rem;line-height:1}
+        .card-title{font-size:1.05rem;font-weight:700}
+        .card-desc{font-size:.9rem;color:var(--muted);line-height:1.6;flex:1}
+        .card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem}
+        .card-tag{font-size:.75rem;padding:.2rem .6rem;border-radius:999px;font-weight:600}
+        .tag-ok{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3)}
+        .tag-soon{background:rgba(148,163,184,.1);color:var(--muted);border:1px solid rgba(148,163,184,.2)}
+        .card-arrow{color:var(--muted);font-size:1.1rem;transition:transform .2s,color .2s}
+        .topic-card:hover .card-arrow{transform:translateX(4px);color:var(--text)}
+
+        .schedule-table{width:100%;border-collapse:collapse;font-size:.95rem}
+        .schedule-table th{background:rgba(59,130,246,.12);color:var(--primary-glow);padding:.8rem 1rem;text-align:left;font-weight:600;border-bottom:2px solid var(--border)}
+        .schedule-table td{padding:.75rem 1rem;border-bottom:1px solid rgba(30,58,95,.5);vertical-align:top}
+        .schedule-table tr:hover td{background:rgba(59,130,246,.04)}
+        .schedule-table tr:last-child td{border-bottom:none}
+        .wk{font-weight:700;color:var(--primary-glow);font-family:'Inter',monospace;white-space:nowrap}
+        .badge{display:inline-block;padding:.15rem .5rem;border-radius:4px;font-size:.82rem;font-weight:600;border:1px solid}
+        .lnk{display:inline-block;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.35);color:#4ade80;padding:.15rem .5rem;border-radius:4px;font-size:.78rem;font-weight:600;text-decoration:none;margin-left:.4rem}
+        .lnk:hover{background:rgba(34,197,94,.25)}
+
+        .assess-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+        .assess-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
+        .assess-pct{font-size:2.2rem;font-weight:800;font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--primary-glow),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .assess-label{font-size:.9rem;color:var(--muted);margin-top:.3rem}
+
+        .book-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;display:flex;align-items:center;gap:1.5rem}
+        .book-icon{font-size:3rem;flex-shrink:0}
+        .book-title{font-size:1.05rem;font-weight:700}
+        .book-author{font-size:.9rem;color:var(--muted);margin-top:.2rem}
+
+        .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 2rem}
+        footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+        @keyframes pulse-glow{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.4)}50%{box-shadow:0 0 0 8px rgba(59,130,246,0)}}
+        .pulse{animation:pulse-glow 2.5s ease-in-out infinite}
+
+        @media(max-width:640px){nav{padding:0 1rem}.nav-links{display:none}.hero{padding:3rem 1rem 2.5rem}section{padding:2.5rem 1rem}.book-card{flex-direction:column;text-align:center}}
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="nav-brand">
+        ⚡ ENGEE160 <span>| Engineering Electronics</span>
+    </a>
+    <div class="nav-links">
+        <a href="#topics">หัวข้อ</a>
+        <a href="#schedule">ตารางเรียน</a>
+        <a href="#assessment">การประเมิน</a>
+        <a href="#references">ตำรา</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="course-badge">ENGEE160 · Engineering Electronics</div>
+    <h1>อิเล็กทรอนิกส์วิศวกรรม</h1>
+    <p class="hero-sub">
+        ศึกษาหลักการอุปกรณ์สารกึ่งตัวนำ ไดโอด ทรานซิสเตอร์ BJT/MOS/CMOS
+        และการประยุกต์ใช้งานวงจรในระบบวิศวกรรมไฟฟ้า
+    </p>
+    <div class="hero-meta">
+        <div class="hero-meta-item">👨‍🏫 <strong>อาจารย์อนุสรณ์ ยอดใจเพ็ชร</strong></div>
+        <div class="hero-meta-item">🏛️ <strong>ห้อง L6404</strong></div>
+        <div class="hero-meta-item">📍 <strong>มทร.ล้านนา เชียงราย</strong></div>
+        <div class="hero-meta-item">📚 <strong>วิศวกรรมไฟฟ้า ปีที่ 2</strong></div>
+    </div>
+</section>
+
+<div class="info-strip">
+    <div class="info-grid">
+        <div class="info-item"><div class="label">รหัสวิชา</div><div class="value code">ENGEE160</div></div>
+        <div class="info-item"><div class="label">หน่วยกิต</div><div class="value">3 หน่วยกิต (2-3-5)</div></div>
+        <div class="info-item"><div class="label">ประเภทวิชา</div><div class="value">วิชาพื้นฐานวิชาชีพ</div></div>
+        <div class="info-item"><div class="label">ตำรา</div><div class="value">Floyd, Electronic Devices</div></div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<section id="topics">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">📖 เนื้อหาการเรียน</div>
+            <h2>หัวข้อในรายวิชา</h2>
+            <p>คลิกที่หัวข้อที่เปิดใช้งานแล้วเพื่อเข้าสู่บทเรียนแบบ Interactive</p>
+        </div>
+        <div class="topics-grid">
+
+            <a href="Semiconductor/index.html" class="topic-card live pulse" style="--ca:#3b82f6;--cb:#8b5cf6">
+                <div class="card-number">หัวข้อที่ 01</div>
+                <div class="card-icon">⚛️</div>
+                <div class="card-title">สารกึ่งตัวนำ (Semiconductor)</div>
+                <div class="card-desc">โครงสร้างอะตอม ตารางธาตุ เวเลนซ์อิเล็กตรอน พันธะโคเวเลนต์ สารกึ่งตัวนำชนิด N และ P การโดปปิ้ง พาหะนำประจุ และประวัติศาสตร์การพัฒนาสู่ยุค AI</div>
+                <div class="card-footer">
+                    <span class="card-tag tag-ok">✅ เปิดใช้งานแล้ว</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <div class="topic-card" style="--ca:#06b6d4;--cb:#3b82f6">
+                <div class="card-number">หัวข้อที่ 02</div>
+                <div class="card-icon">🔵</div>
+                <div class="card-title">ไดโอด (Diode)</div>
+                <div class="card-desc">รอยต่อ P-N การไบแอส ลักษณะสมบัติทางกระแส-แรงดัน (I-V Curve) วงจรเรียงกระแส Clipper, Clamper และ Zener Diode</div>
+                <div class="card-footer"><span class="card-tag tag-soon">🔒 เร็วๆ นี้</span><span class="card-arrow">→</span></div>
+            </div>
+
+            <div class="topic-card" style="--ca:#8b5cf6;--cb:#ec4899">
+                <div class="card-number">หัวข้อที่ 03</div>
+                <div class="card-icon">🔌</div>
+                <div class="card-title">ทรานซิสเตอร์แบบ BJT</div>
+                <div class="card-desc">Bipolar Junction Transistor โครงสร้าง NPN/PNP การไบแอสจุดทำงาน (Q-Point) วงจรขยายสัญญาณ Common-Emitter, Base, Collector</div>
+                <div class="card-footer"><span class="card-tag tag-soon">🔒 เร็วๆ นี้</span><span class="card-arrow">→</span></div>
+            </div>
+
+            <div class="topic-card" style="--ca:#f59e0b;--cb:#ef4444">
+                <div class="card-number">หัวข้อที่ 04</div>
+                <div class="card-icon">🟡</div>
+                <div class="card-title">MOS & CMOS Transistor</div>
+                <div class="card-desc">Metal-Oxide-Semiconductor FET โครงสร้าง NMOS/PMOS วงจร CMOS Gate Logic, Inverter และ Switching Behavior</div>
+                <div class="card-footer"><span class="card-tag tag-soon">🔒 เร็วๆ นี้</span><span class="card-arrow">→</span></div>
+            </div>
+
+            <div class="topic-card" style="--ca:#10b981;--cb:#06b6d4">
+                <div class="card-number">หัวข้อที่ 05</div>
+                <div class="card-icon">🟢</div>
+                <div class="card-title">BiCMOS</div>
+                <div class="card-desc">เทคโนโลยีผสมผสาน BJT และ CMOS การประยุกต์ใช้ในชิปรุ่นใหม่ RF และ Analog Mixed-Signal</div>
+                <div class="card-footer"><span class="card-tag tag-soon">🔒 เร็วๆ นี้</span><span class="card-arrow">→</span></div>
+            </div>
+
+            <div class="topic-card" style="--ca:#ec4899;--cb:#8b5cf6">
+                <div class="card-number">หัวข้อที่ 06</div>
+                <div class="card-icon">📡</div>
+                <div class="card-title">Op-Amp และการประยุกต์ใช้</div>
+                <div class="card-desc">Operational Amplifier วงจรขยายกลับเฟส/ไม่กลับเฟส Summing, Integrator, Differentiator และ Active Filter</div>
+                <div class="card-footer"><span class="card-tag tag-soon">🔒 เร็วๆ นี้</span><span class="card-arrow">→</span></div>
+            </div>
+
+            <div class="topic-card" style="--ca:#f97316;--cb:#eab308">
+                <div class="card-number">หัวข้อที่ 07</div>
+                <div class="card-icon">⚡</div>
+                <div class="card-title">โมดูลแหล่งจ่ายไฟ (Power Supply)</div>
+                <div class="card-desc">วงจรเรียงกระแส Filter วงจรควบคุมแรงดัน LM78xx และ Switching Mode Power Supply (SMPS)</div>
+                <div class="card-footer"><span class="card-tag tag-soon">🔒 เร็วๆ นี้</span><span class="card-arrow">→</span></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="schedule">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">🗓️ แผนการสอน</div>
+            <h2>ตารางการเรียนตลอดภาคการศึกษา</h2>
+            <p>กำหนดการโดยประมาณ — อาจปรับเปลี่ยนตามความเหมาะสม</p>
+        </div>
+        <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
+        <table class="schedule-table">
+            <thead>
+                <tr><th>สัปดาห์</th><th>หัวข้อ</th><th>เนื้อหาโดยย่อ</th><th>ทรัพยากร</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="wk">1 – 2</td>
+                    <td><span class="badge" style="background:rgba(139,92,246,.2);border-color:rgba(139,92,246,.4);color:#c4b5fd">⚛️ Semiconductor</span></td>
+                    <td>ที่มาและความสำคัญ, โครงสร้างอะตอม, ตารางธาตุ, เวเลนซ์อิเล็กตรอน, N-Type และ P-Type</td>
+                    <td><a href="Semiconductor/index.html" class="lnk">เปิดบทเรียน →</a></td>
+                </tr>
+                <tr>
+                    <td class="wk">3 – 5</td>
+                    <td><span class="badge" style="background:rgba(6,182,212,.15);border-color:rgba(6,182,212,.4);color:#67e8f9">🔵 Diode</span></td>
+                    <td>P-N Junction, Forward/Reverse Bias, I-V Curve, วงจรเรียงกระแส, Clipper, Clamper, Zener</td>
+                    <td><span style="color:var(--muted);font-size:.8rem">Floyd Ch. 2-3</span></td>
+                </tr>
+                <tr>
+                    <td class="wk">6 – 9</td>
+                    <td><span class="badge" style="background:rgba(139,92,246,.15);border-color:rgba(139,92,246,.4);color:#c4b5fd">🔌 BJT</span></td>
+                    <td>โครงสร้าง BJT, NPN/PNP, DC Bias, Load Line, Q-Point, Small-Signal Model, CE/CB/CC</td>
+                    <td><span style="color:var(--muted);font-size:.8rem">Floyd Ch. 4-6</span></td>
+                </tr>
+                <tr>
+                    <td class="wk" style="color:var(--red)">สอบกลางภาค</td>
+                    <td colspan="3" style="color:var(--muted);font-style:italic">ครอบคลุมเนื้อหาสัปดาห์ที่ 1-9</td>
+                </tr>
+                <tr>
+                    <td class="wk">10 – 12</td>
+                    <td><span class="badge" style="background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);color:#fcd34d">🟡 MOSFET/CMOS</span></td>
+                    <td>NMOS/PMOS โครงสร้าง, Threshold Voltage, CMOS Inverter, Logic Gate, Switching</td>
+                    <td><span style="color:var(--muted);font-size:.8rem">Floyd Ch. 8-9</span></td>
+                </tr>
+                <tr>
+                    <td class="wk">13</td>
+                    <td><span class="badge" style="background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.4);color:#6ee7b7">🟢 BiCMOS</span></td>
+                    <td>การรวม BJT + CMOS, ข้อดีข้อเสีย, การประยุกต์ใช้งาน RF และ Mixed-Signal</td>
+                    <td><span style="color:var(--muted);font-size:.8rem">Floyd Ch. 10</span></td>
+                </tr>
+                <tr>
+                    <td class="wk">14</td>
+                    <td><span class="badge" style="background:rgba(236,72,153,.15);border-color:rgba(236,72,153,.4);color:#f9a8d4">📡 Op-Amp</span></td>
+                    <td>Ideal Op-Amp, Inverting/Non-inverting, Summing, Active Filter, Comparator</td>
+                    <td><span style="color:var(--muted);font-size:.8rem">Floyd Ch. 12</span></td>
+                </tr>
+                <tr>
+                    <td class="wk">15</td>
+                    <td><span class="badge" style="background:rgba(249,115,22,.15);border-color:rgba(249,115,22,.4);color:#fdba74">⚡ Power Supply</span></td>
+                    <td>Rectifier, Filter, Linear Regulator, LM78xx/79xx, SMPS พื้นฐาน</td>
+                    <td><span style="color:var(--muted);font-size:.8rem">Floyd Ch. 17</span></td>
+                </tr>
+                <tr>
+                    <td class="wk" style="color:var(--red)">สอบปลายภาค</td>
+                    <td colspan="3" style="color:var(--muted);font-style:italic">ครอบคลุมเนื้อหาสัปดาห์ที่ 10-15 (อาจมีเนื้อหาสะสม)</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="assessment">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">📊 การประเมินผล</div>
+            <h2>สัดส่วนคะแนนรายวิชา</h2>
+        </div>
+        <div class="assess-grid">
+            <div class="assess-card"><div class="assess-pct">25%</div><div class="assess-label">📝 สอบกลางภาค<br>(Midterm)</div></div>
+            <div class="assess-card"><div class="assess-pct">25%</div><div class="assess-label">📝 สอบปลายภาค<br>(Final)</div></div>
+            <div class="assess-card"><div class="assess-pct">20%</div><div class="assess-label">🔬 สอบปฏิบัติกลางภาค<br>(Lab Midterm)</div></div>
+            <div class="assess-card"><div class="assess-pct">20%</div><div class="assess-label">🔬 สอบปฏิบัติปลายภาค<br>(Lab Final)</div></div>
+            <div class="assess-card"><div class="assess-pct">5%</div><div class="assess-label">📂 รายงาน/การนำเสนอ<br>งานกลุ่มและผลงาน</div></div>
+            <div class="assess-card"><div class="assess-pct">5%</div><div class="assess-label">🙋 การเข้าชั้นเรียน<br>การมีส่วนร่วม / จริยธรรม</div></div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="references">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">📚 ทรัพยากรการเรียน</div>
+            <h2>ตำรา และเอกสารประกอบ</h2>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1rem">
+            <div class="book-card">
+                <div class="book-icon">📗</div>
+                <div>
+                    <div class="book-title">Electronic Devices (หนังสือเรียนหลัก)</div>
+                    <div class="book-author">Thomas L. Floyd · Prentice Hall, 2012</div>
+                    <div style="margin-top:.5rem;font-size:.85rem;color:var(--muted)">ครอบคลุมเนื้อหาทั้งหมด ตั้งแต่สารกึ่งตัวนำ ไดโอด BJT MOSFET จนถึง Op-Amp และแหล่งจ่ายไฟ</div>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-icon">📘</div>
+                <div>
+                    <div class="book-title">หนังสือพื้นฐานอิเล็กทรอนิกส์ทั่วไป</div>
+                    <div class="book-author">เอกสารเสริม · ห้องสมุดคณะวิศวกรรมศาสตร์</div>
+                    <div style="margin-top:.5rem;font-size:.85rem;color:var(--muted)">อ้างอิงเพิ่มเติมสำหรับการทำความเข้าใจเนื้อหาเชิงลึก</div>
+                </div>
+            </div>
+            <div class="book-card">
+                <div class="book-icon">🌐</div>
+                <div>
+                    <div class="book-title">E-Learning และแหล่งเรียนรู้ออนไลน์</div>
+                    <div class="book-author">Khan Academy · MIT OpenCourseWare · All About Circuits</div>
+                    <div style="margin-top:.5rem;font-size:.85rem;color:var(--muted)">แหล่ง E-learning ของสถาบันการศึกษาต่างๆ และ Website ที่เกี่ยวข้องกับรายวิชา</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>ENGEE160 · อิเล็กทรอนิกส์วิศวกรรม · คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา เชียงราย</p>
+    <p style="margin-top:.3rem">อาจารย์อนุสรณ์ ยอดใจเพ็ชร · ห้อง L6404</p>
+</footer>
+
+</body>
+</html>

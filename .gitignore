@@ -1,0 +1,9 @@
+# Documents
+# Keep Course Syllabus.doc if needed, but usually we ignore binaries.
+# I will keep the syllabus in version control for now since it's the core document.
+# So I'll just ignore caches and OS files.
+
+.DS_Store
+Thumbs.db
+.cache/
+node_modules/
