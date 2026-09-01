@@ -608,8 +608,8 @@ const topics = {
 
                 <!-- Vin Source (left) -->
                 <circle cx="0" cy="100" r="22" fill="none" stroke="#fbbf24" stroke-width="2.5" filter="url(#glow-z)"/>
-                <text x="0" y="95" fill="#fbbf24" font-size="14" text-anchor="middle">AC</text>
-                <text x="0" y="110" fill="#fbbf24" font-size="14" text-anchor="middle">Vin</text>
+                <text x="0" y="95" fill="#fbbf24" font-size="14" text-anchor="middle">DC</text>
+                <text id="vin-label" x="0" y="115" fill="#fbbf24" font-size="12" text-anchor="middle">Vin = 12V</text>
                 <line x1="0" y1="0" x2="0" y2="78" stroke="#94a3b8" stroke-width="2.5"/>
                 <line x1="0" y1="122" x2="0" y2="200" stroke="#94a3b8" stroke-width="2.5"/>
 
@@ -807,7 +807,25 @@ function loadTopic(topicKey) {
         if(simulatorCard) simulatorCard.style.display = 'block';
     }
 
-    document.getElementById('svg-container').innerHTML = data.svg;
+    const canvasContainer = document.getElementById('canvas-container');
+    if (data.svg) {
+        canvasContainer.innerHTML = `
+            <svg viewBox="0 0 600 350" id="anim-svg" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                ${data.svg}
+            </svg>
+        `;
+    } else {
+        canvasContainer.innerHTML = '';
+    }
 
     const controlsContainer = document.getElementById('sim-controls');
     controlsContainer.innerHTML = '';
@@ -861,9 +879,22 @@ function loadTopic(topicKey) {
         btnAnimate.innerText = '▶ วาดกราฟใหม่';
         btnAnimate.onclick = () => {
             // Re-trigger SVG animation by re-loading the svg
-            document.getElementById('svg-container').innerHTML = '';
+            document.getElementById('canvas-container').innerHTML = '';
             setTimeout(() => {
-                document.getElementById('svg-container').innerHTML = data.svg;
+                document.getElementById('canvas-container').innerHTML = `
+                    <svg viewBox="0 0 600 350" id="anim-svg" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="3" result="blur"/>
+                                <feMerge>
+                                    <feMergeNode in="blur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        ${data.svg}
+                    </svg>
+                `;
             }, 50);
         };
         controlsContainer.appendChild(btnAnimate);
@@ -931,8 +962,10 @@ function loadTopic(topicKey) {
         let vinLevel = 12;
         btnVin.onclick = () => {
             vinLevel = vinLevel === 12 ? 6 : 12;
-            const label = document.querySelector('#anim-svg text');
-            if(label) label.innerHTML = `Vin = ${vinLevel}V`;
+            const label = document.getElementById('vin-label');
+            if (label) {
+                label.innerHTML = `Vin = ${vinLevel}V`;
+            }
             btnVin.innerText = vinLevel === 12 ? '⬆️ เพิ่ม Vin (12V)' : '⬇️ ลด Vin (6V → ใกล้ Vz!)';
         };
         controlsContainer.appendChild(btnVin);

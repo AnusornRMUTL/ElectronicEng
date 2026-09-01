@@ -35,19 +35,8 @@
                     &nbsp; ภาพจำลองการทำงาน (Interactive Simulation)
                 </div>
                 <div class="simulator-controls" id="sim-controls"></div>
-                <div class="simulator-canvas">
-                    <svg viewBox="0 0 600 350" id="anim-svg" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur stdDeviation="3" result="blur"/>
-                                <feMerge>
-                                    <feMergeNode in="blur"/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
-                        </defs>
-                        <g id="svg-container"></g>
-                    </svg>
+                <div class="simulator-canvas" id="canvas-container">
+                    <!-- SVG injected here -->
                 </div>
             </div>
 
