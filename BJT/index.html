@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>ทรานซิสเตอร์แบบ BJT (Bipolar Junction Transistor) — ENGEE160 Electronics</title>
+    <meta name="description" content="บทเรียนอินเทอร์แอคทีฟ ทรานซิสเตอร์แบบ BJT: โครงสร้าง NPN/PNP, การไบแอสจุดทำงาน Q-Point, โหมดการทำงาน Active/Saturation/Cutoff, วงจรขยาย CE/CB/CC, BJT Switch">
+    <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-btn">⬅ กลับหน้าหลัก</a>
+        <div class="logo">⚡ BJT Transistor Interactive Learning — ENGEE160</div>
+    </header>
+
+    <div class="app-container">
+        <aside id="sidebar">
+            <div class="sidebar-label">📚 หัวข้อบทเรียน</div>
+            <!-- Navigation injected by JS -->
+        </aside>
+
+        <main>
+            <!-- Title Card -->
+            <div class="card" id="info-card">
+                <h1 id="topic-title">หัวข้อบทเรียน</h1>
+                <p class="desc-text" id="topic-desc"></p>
+            </div>
+
+            <!-- Simulator Card -->
+            <div class="simulator-card" id="sim-card">
+                <div class="sim-header">
+                    <div class="sim-dot red"></div>
+                    <div class="sim-dot yellow"></div>
+                    <div class="sim-dot green"></div>
+                    &nbsp; ภาพจำลองการทำงานแบบอินเทอร์แอคทีฟ (Interactive Simulation)
+                </div>
+                <div class="simulator-controls" id="sim-controls"></div>
+                <div class="simulator-canvas" id="canvas-container">
+                    <!-- SVG injected here -->
+                </div>
+            </div>
+
+            <!-- Extra Info Card -->
+            <div class="extra-card" id="extra-info-card">
+                <div id="topic-extra"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../common/certificate-engine.js?v=3"></script>
+    <script src="../common/quiz-engine.js?v=3"></script>
+    <script src="quiz-data.js?v=3"></script>
+    <script src="script.js?v=3"></script>
+</body>
+</html>

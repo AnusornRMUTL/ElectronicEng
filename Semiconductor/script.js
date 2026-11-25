@@ -585,79 +585,14 @@ const topics = {
     }
 };
 
-const quizQuestions = [
-    {
-        q: '1. วัสดุใดที่นิยมนำมาสร้างเป็นสารกึ่งตัวนำมากที่สุด?',
-        choices: ['ก. ทองแดง (Copper)', 'ข. ซิลิกอน (Silicon)', 'ค. เจอร์เมเนียม (Germanium)', 'ง. คาร์บอน (Carbon)'],
-        a: 1
-    },
-    {
-        q: '2. สารกึ่งตัวนำชนิด N (N-Type) มีพาหะส่วนมาก (Majority Carrier) คืออะไร?',
-        choices: ['ก. โฮล (Holes)', 'ข. โปรตอน (Protons)', 'ค. อิเล็กตรอน (Electrons)', 'ง. นิวตรอน (Neutrons)'],
-        a: 2
-    },
-    {
-        q: '3. การโดป (Doping) สารกึ่งตัวนำชนิด P (P-Type) ต้องใช้ธาตุเจือปนในหมู่ใด?',
-        choices: ['ก. หมู่ 3 (เช่น โบรอน)', 'ข. หมู่ 4 (เช่น คาร์บอน)', 'ค. หมู่ 5 (เช่น ฟอสฟอรัส)', 'ง. หมู่ 6 (เช่น ออกซิเจน)'],
-        a: 0
-    }
-];
-
 function renderQuiz() {
-    const container = document.getElementById('quiz-container');
-    if (!container) return;
-    
-    let html = '';
-    quizQuestions.forEach((item, index) => {
-        html += `
-            <div class="quiz-question" style="margin-bottom: 1.5rem;">
-                <h3 style="margin-bottom: 0.8rem; font-size: 1.1rem; color: var(--primary-light, #c4b5fd);">${item.q}</h3>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    ${item.choices.map((choice, i) => `
-                        <label style="cursor: pointer; padding: 0.75rem 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border: 1px solid var(--border); transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
-                            <input type="radio" name="q${index}" value="${i}" style="margin-right: 0.5rem; accent-color: var(--primary);"> ${choice}
-                        </label>
-                    `).join('')}
-                </div>
-                <div id="feedback-${index}" style="margin-top: 0.75rem; font-weight: bold; font-size: 0.95rem;"></div>
-            </div>
-        `;
-    });
-    
-    html += `<button onclick="checkQuiz()" style="background: var(--primary); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; font-family: 'Sarabun'; cursor: pointer; margin-top: 1rem; font-weight: 600; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3); transition: background 0.2s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'">ส่งคำตอบ (Submit)</button>`;
-    html += `<div id="quiz-result" style="margin-top: 1.5rem; font-size: 1.25rem; font-weight: bold; text-align: center; padding: 1rem; border-radius: 8px;"></div>`;
-    
-    container.innerHTML = html;
-}
-
-function checkQuiz() {
-    let score = 0;
-    quizQuestions.forEach((item, index) => {
-        const selected = document.querySelector(`input[name="q${index}"]:checked`);
-        const feedback = document.getElementById(`feedback-${index}`);
-        if (selected) {
-            const val = parseInt(selected.value);
-            if (val === item.a) {
-                score++;
-                feedback.innerHTML = '<span style="color: #4ade80;">✅ ถูกต้อง!</span>';
-            } else {
-                feedback.innerHTML = `<span style="color: #f87171;">❌ ผิด (คำตอบที่ถูกคือ: ${item.choices[item.a]})</span>`;
-            }
-        } else {
-            feedback.innerHTML = '<span style="color: #fbbf24;">⚠️ กรุณาเลือกคำตอบ</span>';
-        }
-    });
-    
-    const resultBox = document.getElementById('quiz-result');
-    resultBox.innerHTML = `คะแนนของคุณ: ${score} / ${quizQuestions.length}`;
-    if(score === quizQuestions.length) {
-        resultBox.style.background = 'rgba(74, 222, 128, 0.2)';
-        resultBox.style.color = '#4ade80';
-        resultBox.style.border = '1px solid #4ade80';
-    } else {
-        resultBox.style.background = 'rgba(251, 191, 36, 0.2)';
-        resultBox.style.color = '#fbbf24';
-        resultBox.style.border = '1px solid #fbbf24';
+    if (typeof QuizEngine !== 'undefined' && typeof semiconductorQuizQuestions !== 'undefined') {
+        QuizEngine.init({
+            containerId: 'quiz-container',
+            lessonTitle: 'สารกึ่งตัวนำ (Semiconductor)',
+            questionBank: semiconductorQuizQuestions,
+            count: 10
+        });
     }
 }
 

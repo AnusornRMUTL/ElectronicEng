@@ -259,6 +259,13 @@ p, li { color: var(--text-light); font-size: 1.05rem; }
     transform: translateY(-1px);
 }
 .btn-control:active { transform: translateY(0); }
+.btn-control.active {
+    background: var(--primary);
+    color: #080f1e;
+    border-color: var(--primary);
+    box-shadow: 0 0 16px var(--primary-glow);
+    font-weight: 700;
+}
 
 /* Simulator Canvas */
 .simulator-canvas {
