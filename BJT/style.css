@@ -308,8 +308,8 @@ p, li { color: var(--text-light); font-size: 1.05rem; }
     background-size: 40px 40px;
     position: relative;
     width: 100%;
-    min-height: 380px;
-    aspect-ratio: 16 / 7.5;
+    min-height: 410px;
+    aspect-ratio: 900 / 440;
     overflow: hidden;
 }
 
@@ -318,6 +318,7 @@ p, li { color: var(--text-light); font-size: 1.05rem; }
     height: 100%;
     position: absolute;
     top: 0; left: 0;
+    font-family: 'Sarabun', sans-serif;
 }
 
 /* ===== EXTRA CARD ===== */
